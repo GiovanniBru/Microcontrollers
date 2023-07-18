@@ -2,7 +2,7 @@
 Repositório de atividades da disciplina Introdução à Microcontroladores, cursada no período 2022.2 do curso de Engenharia da Computação na UFPB.
 Repository of activities for the discipline Introduction to Microcontrollers, attended in the period 2022.2 of the Computer Engineering course at UFPB.
 
-O _data sheet_ dos microcontroladores utilizados estão anexados, juntamente a outros materiais auxiliares, na pasta _'documentos auxiliares'_.
+O _data sheet_ do microcontrolador utilizado está anexados, juntamente a outros materiais auxiliares, na pasta _'documentos auxiliares'_.
 
 _tags: micro, microcontrollers, microcontroladores, ufpb, assembly, dht11, pic12f675, pic16f628a, ultrassom, hc-sr04._
 
@@ -135,7 +135,7 @@ _Especificações:_
 ## 8 - Detectando obstáculos ("Régua eletrônica") 
 _Objetivo:_ Atividade integrada para familiarização do conjunto de instruções do **PIC16F628A** com periféricos externos e funcionalidades. 
 _Especificações:_ 
-- A aplicação deve utilizar a placa de desenvolvimento para o PIC16F628A;
+- A aplicação deve utilizar a placa de desenvolvimento para o PIC16F628A, [datasheet aqui](https://octopart.com/datasheet/pic16f628a-i%2Fp-microchip-95269);
 - Módulo ultrassom **HC-SR04** será utilizado para ser acoplado à placa de desenvolvimento (documentação anexada em _'documentos auxiliares'_);
 - O valor da medida da distância deve ser visualizado no display LCD;
 - As portas para comunicação com o sensor ultrassom devem ser claramente identificadas no arquivo ".ASM";
