@@ -4,7 +4,7 @@ Repository of activities for the discipline Introduction to Microcontrollers, at
 
 O _data sheet_ dos microcontroladores utilizados estão anexados, juntamente a outros materiais auxiliares, na pasta _'documentos auxiliares'_.
 
-tags: micro, microcontrollers, microcontroladores, ufpb, assembly, dht11, pic12f675, pic16f628a, ultrassom, ultrasonic, hc-sr04.
+_tags: micro, microcontrollers, microcontroladores, ufpb, assembly, dht11, pic12f675, pic16f628a, ultrassom, hc-sr04._
 
 
 ## 1 - Produto de dois números em Assembly
