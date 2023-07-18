@@ -17,8 +17,7 @@ _Especificações:_
 - Veja os exemplos:
 
 <p float="left">
- <img src="" width="200" />
- <img src="" width="200" /> 
+ <img src="https://github.com/GiovanniBru/Microcontrollers/blob/main/imagens/1_exemplo_produto.png" width="200" />
 </p>
 
 
@@ -28,7 +27,7 @@ _Especificações:_
 - O microcontrolador utilizado deverá ser o PIC12F675;
 - Duas chaves serão utilizadas para configurar a intensidade LED, alterando o _duty_ _cycle_, conforme tabela abaixo:
 <p float="left">
- <img src="" width="200" />
+ <img src="https://github.com/GiovanniBru/Microcontrollers/blob/main/imagens/2_duty_cyle.png" width="200" />
 </p>
 - Quando houver _duty_ _cycle_ diferente de 100%, a frequência do sinal deve ser de 500Hz;
 - GP0 deverá ser utilizado para o bit 0 da chave;
@@ -129,7 +128,7 @@ _Especificações:_
 - As medidas de temperatura e umidade relativa devem ser feitas a cada 1 segundo;
 - No LCD, as informações devem ser apresentadas na forma do exemplo abaixo:
 <p float="left">
- <img src="" width="200" />
+ <img src="https://github.com/GiovanniBru/Microcontrollers/blob/main/imagens/7_exemplo_lcd.png" width="200" />
 </p>
 
 
@@ -141,6 +140,14 @@ _Especificações:_
 - O valor da medida da distância deve ser visualizado no display LCD;
 - As portas para comunicação com o sensor ultrassom devem ser claramente identificadas no arquivo ".ASM";
 - O ciclo de repetição deve obedecer às recomendações do data sheet do sensor ultrassom.
+
+
+
+
+
+
+
+
 
 
 
