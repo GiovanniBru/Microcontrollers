@@ -1,62 +1,93 @@
-# microcontroladores
-Repositório com os trabalhos da disciplina de Microcontroladores, que aconteceu no período de 2018.2. Este curso foi ofertado pelo professor Dr. Mardson Amorim. A disciplina de Microcontroladores faz parte da grade curricular do bacharelado em Engenharia de Computação na Universidade Federal da Paraíba (UFPB).
+# Microcontrollers / Microcontroladores
+Repositório de atividades da disciplina Introdução à Microcontroladores, cursada no período 2022.2 do curso de Engenharia da Computação na UFPB.
+Repository of activities for the discipline Introduction to Microcontrollers, attended in the period 2022.2 of the Computer Engineering course at UFPB.
 
-Nas palavras de Chuck Palahniuk, Clube da Luta:
+O _data sheet_ dos microcontroladores utilizados estão anexados, juntamente a outros materiais auxiliares, na pasta _'documentos auxiliares'_.
 
-> Everything is a copy of a copy of a copy.
+tags: micro, microcontrollers, microcontroladores, ufpb, assembly, dht11, pic12f675, pic16f628a, ultrassom, ultrasonic, hc-sr04.
 
-# especificação dos trabalhos
 
-## bcd com PIC12F675
+## 1 - Produto de dois números em Assembly
+_Objetivo:_ Exercício de familiarização com o conjunto de instruções do PIC.
+_Especificações:_ 
+- Dado dois valores em **hexadecimal**, armazenados nas variáveis X1 e X2 (1 byte cada), propor um programa na linguagem assembly (PIC12F675) para efetuar o produto desses números; 
+- Como o resultado do produto pode ser um valor maior que FF, considera-se que os resultados devem ser apresentados em dois bytes (variáveis R1 e R2);
+- A variável R2 será utilizada como byte mais significativo e a variável R1 como byte menos significativo;
+- Se o resultado do produto for menor ou igual a 00FF, a variável R2 deverá conter zero.
+- Veja os exemplos:
 
-- Dado um valor em hexadecimal (1 byte), converter esse valor para a notação BCD.
-- Considera-se que o valor a ser convertido estará armazenado no registrador WORK e, após a conversão, o valor será armazenado na variável DADO;
-- Se o valor convertido for maior que 99, o registrador WORK será utilizado como byte complementar;
-- Se o valor convertido for menor que 99, o registrador WORK deverá conter zero
+<p float="left">
+ <img src="" width="200" />
+ <img src="" width="200" /> 
+</p>
 
-## frequências com PIC12F675
 
-Dado um sinal de onda quadrada, que opera em 4 diferentes frequências, identifique-as com a sinalização através de LEDs.
+## 2 - Controlador de intensidade de um LED
+_Objetivo:_ Exercícios para gerenciamento de portas e de tempo.
+_Especificações:_ 
+- O microcontrolador utilizado deverá ser o PIC12F675;
+- Duas chaves serão utilizadas para configurar a intensidade LED, alterando o _duty_ _cycle_, conforme tabela abaixo:
+<p float="left">
+ <img src="" width="200" />
+</p>
+- Quando houver _duty_ _cycle_ diferente de 100%, a frequência do sinal deve ser de 500Hz;
+- GP0 deverá ser utilizado para o bit 0 da chave;
+- GP1 deverá ser utilizado para o bit 1 da chave;
+- GP5 deverá ser utilizado para ativar o LED;
+- Pelo menos um TIMER deve ser utilizado.
 
-- As frequências a serem verificadas são: 5kHz, 10kHz, 20kHz e 30kHz;
-- A porta de entrada que receberá o sinal deve ser através de GP2;
-- Os LEDs devem ser ativados (ON) apenas para indicar sua frequência correspondente, de acordo com a tabela abaixo:
+## 3 - Controlador Automotivo: PISCA
+_Objetivo:_ Exercícios para gerenciamento de portas e de tempo (com TIMERs e interrupção).
+_Contexto:_ Sistema de sinalização automotiva, controlando o "pisca-pisca" lados direito e esquerdo, quando acionados. 
+_Especificações:_ 
+- O microcontrolador utilizado deverá ser o PIC12F675;
+- O sistema contém um interruptor de 3 posições, para acender 2 LEDs (LED-E e LED-D):
+  - Quando na posição central, o LED-E e o LED-D permanecem apagados;
+  - Quando na posição E (esquerda), o LED-E piscará com frequência de 1 Hz;
+  - Quando na posição D (direita), o LED-D piscará com frequência de 1 Hz;
+- O sistema contém um interruptor (liga-desliga), para piscar os dois LEDs ao mesmo tempo (função alerta), com frequência de 1 Hz. Esse interruptor deve ter maior prioridade;
+- GP0 deverá ser utilizado com o interruptor que comandará a função "alerta";
+- GP1 e GP2 deverão ser utilizados para o interruptor de 3 posições;
+- GP4 e GP5 deverão ser utilizados, respectivamente, para os LED-E e LED-D; 
+- O uso de interrupção é obrigatório.
 
-|        Tabela       |
-|---------------------|
-| GP0 ON para f=5kHz  |
-| GP1 ON para f=10kHz |
-| GP4 ON para f=20kHz |
-| GP5 ON para f=30kHz | 
 
-- A tolerância ao erro será uma variação de 10% sobre a frequência identificada;
+## 4 - Comparador: medindo de 0 a 3,5V em uma escala de 0 a 7 e indicação em BCD
+_Objetivo:_ Exercício de familiarização com o comparador do PIC. 
+_Contexto:_ Um valor de tensão entre 0 e 3,5V deve ser representado em uma escala discreta, indicando a escala de 0 a 7 em BCD, para representação em um display de 7 segmentos. 
+_Especificações:_ 
+- O microcontrolador utilizado deverá ser o PIC12F675;
+- NÃO é permitida a utilização do conversor A/D;
+- A tensão de entrada é de 0 a 3,5V;
+- A conversão de tensão para a escala de 0 a 9 deve ser efetuada através do comparador;
+- O valor da tensão deve ser convertido para codificação BCD para ser conectado ao display de 7 segmentos;
+- A indicação deve ser efetuada, em modo cíclico e tão rápido quanto possível (limitado pela velocidade do microcontrolador);
+- Os bits do display b3,b2,b1,b0 devem ser conectados às portas GP5,GP4,GP2,GP0, respectivamente;
+- Os níveis de tensão e a escala correspondente está na descrito na tabela a seguir:
 
-## utilizando a EEPROM com PIC12F675
+| Valor da Tensão (V) | Valor mostrado no display |
+|---------------------|---------------------------|
+| AD <= 0,5           | 0                         |
+| 0,5 < AD <= 1       | 1                         |
+| 1,0 < AD <= 1,5     | 2                         |
+| 1,5 < AD <= 2       | 3                         |
+| 2 < AD <= 2,5       | 4                         |
+| 2,5 < AD <= 3       | 5                         |
+| 3 < AD <= 3,5       | 6                         |
+| 3,5 < AD            | 7                         |
 
-Gravar e recuperar dados na memória perene (EEPROM).
-Medir o tempo para colocar em ordem decrescente dados previamente armazenados na EEPROM.
-
-- Apague todos os leds;
-- Considere 40 bytes já armazenados na EEPROM, a partir do endereço 00h;
-- Acenda o led GP5 imediatamente antes de iniciar a ordenação para sinalizar o início do processo;
-- Coloque-os em ordem decrescente;
-- Apague o led GP5 imediatamente depois para sinalizar que a ordenação terminou;
-- A medição será efetuada com o osciloscópio;
-- Esta tarefa terá um ponto suplementar para 3 alunos que conseguirem os menores tempos.
-
-Eu obtive um tempo de **381,07ms** nessa atividade. A dica que posso dar é: evite ao máximo leitura e escrita na memória, só o faça quando for extremamente necessário. Assim, o tempo de execução do seu algoritmo decairá _bastante_!
-Outra dica valiosa é que você deve pesquisar por algoritmos na literatura que se adequem bem ao problema que você quer resolver. Escolhi o selection sort para tal.
-
-## voltímetro com indicação em BCD com PIC12F675
-
-- Conversão A/D deve ser efetuada, em modo cíclico e tão rápido quanto possível (limitado pela velocidade do microcontrolador);
-- O valor da conversão A/D, de 0V a 5V, deve ser transformado para uma escala de 0 a 9, em valores inteiros. Veja a escala na tabela abaixo;
-- O valor da escala a ser mostrado, de 0 a 9, deve ser representado na codificação BCD para ser conectado ao display de 7 segmentos (kit  didático do LABEC 2). Para que todos tenham a mesma conectividade, siga a seguinte configuração:
-- GP0 → b0 (MENOS significativo) do BCD
-- GP1 → b1 do BCD
-- GP4 → b2 do BCD
-- GP5 → b3 (MAIS significativo) do BCD
-- A conversão A/D deve ser feita pela porta GP2;
+## 5 - Conversor A/D: medindo de 0 a 5V em uma escala de 0 a 9 e indicação em BCD
+_Objetivo:_ Exercício de familiarização com o comparador do PIC.
+_Contexto:_ Um valor de tensão entre 0 e 5V deve ser representado em uma escala discreta, indicando a escala de 0 a 9 em BCD, para representação em um display de 7 segmentos.
+_Especificações:_ 
+- O microcontrolador utilizado deverá ser o PIC12F675;
+- **NÃO** é permitida a utilização do comparador;
+- A tensão de entrada é de 0 a 5V;
+- A conversão de tensão para a escala de 0 a 9 deve ser efetuada através do conversor A/D;
+- O valor da tensão deve ser convertido para codificação BCD para ser conectado ao display de 7 segmentos;
+- A indicação deve ser efetuada, em modo cíclico, com taxa de amostragem de 100ms;
+- Os bits do display b3,b2,b1,b0 devem ser conectados às portas GP5,GP4,GP2,GP0, respectivamente; 
+- Os níveis de tensão e a escala correspondente está na descrito na tabela a seguir:
 
 | Valor da Tensão (V) | Valor mostrado no display |
 |---------------------|---------------------------|
@@ -71,84 +102,48 @@ Outra dica valiosa é que você deve pesquisar por algoritmos na literatura que 
 | 4 < AD <= 4,5       | 8                         |
 | AD > 4,5            | 9                         |
 
-## controlador com histerese: sensor LDR com PIC12F675
 
-Implementar um sistema de controle de iluminação artificial para ambiente, utilizando o princípio da histerese para evitar a “flutuação” da comutação no valor de comparação. Para isso, serão utilizados dois valores distintos (Lmín e Lmáx) para definir uma faixa de comutação.
+## 6 - Conversor A/D e medição de tensão de 0 a 5v 
+_Objetivo:_ Exercício de familiarização com o conversor A/D do PIC e desenvolvimento de rotinas aritméticas.
+_Contexto:_ Medir uma tensão e indicar em um display LCD. 
+_Especificações:_ 
+- O microcontrolador utilizado deverá ser o PIC12F675;
+- A conversão A/D deve ser feita em 8 bits pela porta GP2;
+- Faça a aquisição 32 valores para calcular a média de cada medida;
+- A conversão A/D deve ser efetuada, em modo cíclico e tão rápido quanto possível (limitado pela velocidade do microcontrolador);
+- O valor da média conversão A/D deve ser transformado para o correspondente em tensão em volt, com uma casa decimal; 
+- Crie um algoritmo para efetuar os cálculos da divisão com uma casa decimal de precisão;
+- O valor mostrado no display deve ser atualizado a cada 200 ms;
+- A documentação com a descrição do funcionamento do LCD Serial está anexada em _'documentos auxiliares'_. 
 
-_Como funciona:_
 
-- Condições iniciais 1:
-- Supondo que a iluminação de controle do comparador está configurado para Lmáx;
-- Supondo que a iluminação ambiente (LAMB), a ser comparada, é superior a Lmáx;
-- Nessas condições:
-- a iluminação artificial deve ser desligada;
-- e altera-se a configuração do comparador para Lmín.
+## 7 - Controle de periférico - Leitura do Sensor DHT11
+_Objetivo:_ Comunicação do PIC12F675 com um periférico externo.
+_Contexto:_ Implementar um _termohigrômetro_ com microcontrolador e sensor DHT11.
+_Especificações:_ 
+- A atividade deverá ser implementada com o kit LCD/PIC2F675 e com o sensor DHT11;
+- Faça reuso (com os ajustes necessários) das rotinas desenvolvidas anteriormente para manipular o LCD;
+- As especificações do protocolo de comunicação com o sensor DHT11 estão definidas no seu datasheet anexado em _'documentos auxiliares'_.
+- O PIC deve utilizar a porta GP2 para comunicação com o DHT11;
+- O PIC deve utilizar a porta GP1 para comunicação com o LCD;
+- As medidas de temperatura e umidade relativa devem ser feitas a cada 1 segundo;
+- No LCD, as informações devem ser apresentadas na forma do exemplo abaixo:
+<p float="left">
+ <img src="" width="200" />
+</p>
 
-- Condições iniciais 2:
-- Supondo que a iluminação de controle do comparador está configurado para Lmín;
-- Supondo que a iluminação ambiente (LAMB), a ser comparada, é inferior a Lmin;
-- Nessas condições:
-- a iluminação artificial deve ser ligada;
-- e altera-se a configuração do comparador para Lmáx
-- Para qualquer outra condição diferente das descritas acima:
-- Mantém o estado anterior de funcionamento da iluminação artificial (ligada ou desligada);
-- Mantém o valor anterior de configuração do comparador (Lmín ou Lmáx).
 
-_Especificações:_
-- A conversão de iluminação (medida pelo LDR) para tensão (V) faz parte do projeto. Assim, a partir do LDR, faça o levantamento das especificações e as medidas que considerar necessárias.
-- A escolha da equação do comparador deve ser justificada pela demonstração dos diferentes valores obtidos.
-- GP1 deverá ser utilizado para receber o sinal do LDR;
-- GP2 deverá ser utilizado para fornecer o sinal de controle.
+## 8 - Detectando obstáculos ("Régua eletrônica") 
+_Objetivo:_ Atividade integrada para familiarização do conjunto de instruções do **PIC16F628A** com periféricos externos e funcionalidades. 
+_Especificações:_ 
+- A aplicação deve utilizar a placa de desenvolvimento para o PIC16F628A;
+- Módulo ultrassom **HC-SR04** será utilizado para ser acoplado à placa de desenvolvimento (documentação anexada em _'documentos auxiliares'_);
+- O valor da medida da distância deve ser visualizado no display LCD;
+- As portas para comunicação com o sensor ultrassom devem ser claramente identificadas no arquivo ".ASM";
+- O ciclo de repetição deve obedecer às recomendações do data sheet do sensor ultrassom.
 
-## controlador de LED RGB com PIC12F675
 
-Controle da cor e da intensidade do brilho de um LED RGB.
 
-- Após o RESET, os LEDs deverão estar apagados;
-- Duas chaves serão utilizadas para selecionar o LED que será ajustado, segundo a tabela:
 
-| Chaves | Cor do LED |
-|--------|------------|
-| 00     | Desligados |
-| 01     | Red        |
-| 10     | Green      |
-| 11     | Blue       |
 
-- Um canal será utilizado para conversão A/D será utilizada para controlar a intensidade (duty cycle) do brilho do LED selecionado;
-- A intensidade do LED ajustado deverá ser mantida após a alteração da seleção para outro LED;
-- Quando houver duty cycle diferente de 100%, a frequência do sinal deve ser de 500Hz;
-- GP0, GP1 e GP2 deverão ser utilizados para produzir os sinais PWM, respectivamente, para os LED R, G e B;
-- GP3 e GP5 deverão ser utilizados para efetuar a seleção do LED que será ajustado;
-- GP4 deverá ser utilizado efetuar a conversão A/D;
-
-## sensor dht11 com PIC16F628A
-
-Familiarização com o gerenciamento de energia, leitura dos dados do sensor DHT11.
-O sensor DHT11 fornece, de forma digital, as medidas de umidade relativa e de temperatura. Tais medidas devem ser enviadas a display 7 segmentos, obedecendo, pelo menos, a todas as especificações descritas abaixo.
-
-_Especificações:_
-
-- O projeto deve utilizar o PIC16F628A;
-- A comunicação com o sensor DHT11 deve obedecer às especificações fornecidas pelo respectivo datasheet;
-- Para comunicação com o DHT11 a porta RA0 do PIC deve ser utilizada;
-- Os valores de temperatura e umidade devem ser visualizados em 2 display de 7 segmentos;
-- Quando RA1 for LOW, o valor da temperatura deve ser exibido;
-- Quando RA1 for HIGH, o valor da umidade deve ser exibido;
-- As medidas (umidade e temperatura) devem ser solicitadas ao DHT11 uma vez a cada 2 segundos (aproximadamente). Para essa temporização o watchdog deve ser utilizado;
-- O microcontrolador deve permanecer em modo sleep enquanto não estiver em processo de aquisição e envio de dados ao LCD;
-- A saída de clock (CLKOUT) deve estar ativa (via RA6) para que seja possível caracterizar o estado sleep.
-
-## comunicação I2C com PIC16F628A
-
-Implementação do protocolo I2C no modo SLAVE.
-
-_Especificações:_
-- O protocolo I2C deve ser implementado no PIC (16F628A) no modo SLAVE;
-- O PIC deve receber um byte de endereço e sinalizar sua identificação através de um LED;
-- Quando o endereço for identificado como correto, um ACK deve ser enviado e o sinal CLK deve forçado a LOW por 100 ms;
-- Um LED deve indicar que o endereço correto foi recebido, mantendo-o aceso pelo mesmo tempo do ACK em LOW;
-- Para padronizar a utilização das portas, deve ser adotado:
-- RA0 - SCL
-- RA1 - SDA
-- RB7 - LED
-- Endereço: (2A)h
+_Obs: Alguns códigos não foram testados pois passei uma parte do tempo sem acesso a IDE para compilar, por problemas no computador, então não posso garantir resultado. Qualquer dúvida em que possa ajudar um estudante, me contate no e-mail: giovannibrunocarvalho@gmail.com, seria um prazer repassar meu conhecimento adquirido nessa disciplina!_
